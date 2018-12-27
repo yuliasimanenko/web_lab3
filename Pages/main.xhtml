@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:my="http://java.sun.com/jsf/composite/Components" xmlns:p="http://www.icefaces.org/icefaces/components"
+>
+    <h:head>
+        <title>Лабораторная работа 3</title>
+        <h:outputStylesheet name="css/style.css" />
+        <h:outputStylesheet name="css/main.css" />
+    </h:head>
+
+    <h:body>
+        <div id="bg-img" />
+
+        <main>
+            <h2>Проверка попадания точки в область</h2>
+
+            <h:form styleClass="checkForm">
+                <table style="width: 100%;">
+                    <tr>
+                        <td class="leftcol">Координата X:</td>
+                        <td class="rightcol" colspan="3">
+                            <h:selectOneMenu value="#{formInput.x}" >
+                                <f:selectItem itemValue = "-2" itemLabel = "-2"  />
+                                <f:selectItem itemValue = "-1.5" itemLabel = "-1.5" />
+                                <f:selectItem itemValue = "-1" itemLabel = "-1" />
+                                <f:selectItem itemValue = "-0.5" itemLabel = "-0.5" />
+                                <f:selectItem itemValue = "0" itemLabel = "0" />
+                                <f:selectItem itemValue = "0.5" itemLabel = "0.5" />
+                                <f:selectItem itemValue = "1" itemLabel = "1" />
+                                <f:selectItem itemValue = "1.5" itemLabel = "1.5" />
+                            </h:selectOneMenu>
+                            <!--<f:event name="validateEvent" listener="#{checkboxvalidator.validate}" type="postValidate" />-->
+                            <!--<h:selectBooleanCheckbox id="x0" value="#{formInput.x0}" /> -4-->
+                            <!--<h:selectBooleanCheckbox id="x1" value="#{formInput.x1}" /> -3-->
+                            <!--<h:selectBooleanCheckbox id="x2" value="#{formInput.x2}" /> -2-->
+                            <!--<h:selectBooleanCheckbox id="x3" value="#{formInput.x3}" /> -1-->
+                            <!--<h:selectBooleanCheckbox id="x4" value="#{formInput.x4}" /> 0-->
+                            <!--<h:selectBooleanCheckbox id="x5" value="#{formInput.x5}" /> 1-->
+                            <!--<h:selectBooleanCheckbox id="x6" value="#{formInput.x6}" /> 2-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="leftcol">Координата Y:</td>
+                        <td class="rightcol" colspan="3">
+                            <h:inputText id="inputY" value="#{formInput.y}" validatorMessage="Y должно быть в диапазоне (-3; 5).">
+                                <f:validateDoubleRange minimum="-2.99999" maximum="4.99999"/>
+                            </h:inputText>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="leftcol">Радиус R:</td>
+                        <td class="rightcol" colspan="3">
+                            <h:commandLink action="#{formInput.setR(1)}">R = 1</h:commandLink><br/>
+                            <h:commandLink action="#{formInput.setR(1.5)}">R = 1.5</h:commandLink><br/>
+
+                            <!--<h:selectOneRadio id="inputR" required="true" value="#{formInput.r}" onclick="radiusChanged(this.value);">-->
+                                <!--<c:forEach var="value" items="#{formInputLimits.allowedR}">-->
+                                    <!--<f:selectItem itemValue="#{value}" itemLabel="#{value}" />-->
+                                <!--</c:forEach>-->
+                            <!--</h:selectOneRadio>-->
+
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <h:commandButton value="Check" action="#{formInput.performCheck}" /> <br />
+                            <!--<h:message for="inputR" /> <br />-->
+                            <h:message for="inputY" /> <br />
+                            <!--<h:message for="x0" /> <br />-->
+                            <h:outputText value="#{formInput.resultStr}" id="checkResultOutput" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+
+            <my:AreaViewComponent AreaColor="#3399FF" PointInAreaColor="#00FF00" PointOutOfAreaColor="#FF3F00" />
+
+            <my:HistoryComponent />
+
+            <h:form>
+                <h:commandLink action="#{navigationController.viewHomePage}" value="На стартовую страницу" />
+            </h:form>
+
+            <h:outputScript>
+                function radiusChanged(r) {
+                    "use strict";
+                    AreaViewComponent_View.setRadius(r);
+                    console.log("changed to " + r);
+                }
+            </h:outputScript>
+        </main>
+    </h:body>
+</html>

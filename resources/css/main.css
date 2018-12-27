@@ -1,0 +1,32 @@
+main {
+    text-align: center;
+}
+
+#AreaViewComponent {
+
+}
+
+#HistoryComponent {
+    margin-bottom: 5px;
+    border: 1px solid #000000;
+}
+
+#HistoryComponentInner {
+    max-height: 500px;
+    overflow: scroll;
+}
+
+footer {
+    margin-top: 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 14px;
+}
+
+.leftcol {
+    text-align: right;
+}
+
+.rightcol {
+    text-align: left;
+}

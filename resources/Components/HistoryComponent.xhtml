@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+>
+
+    <composite:interface>
+
+    </composite:interface>
+
+    <composite:implementation>
+
+        <div id="HistoryComponent">
+            <h3>История проверок</h3>
+            <p:outputPanel autoUpdate="true">
+                <!-- <h:form>
+                    <table>
+                        <tr>
+                            <td>Имя пользователя БД: </td>
+                            <td>
+                                <h:inputText id="userName" value="#{history.userName}" required="true" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Пароль пользователя БД: </td>
+                            <td>
+                                <h:inputSecret id="userPass" value="#{history.userPassword}" required="true" />
+                            </td>
+                        </tr>
+                    </table>
+                    <h:commandButton action="#{history.submitCredentials}" value="Отправить" />
+                </h:form> -->
+
+                <h:form>
+                    <div id="HistoryComponentInner">
+                        <!-- <c:choose>
+                            <c:when test="#{history.areCredentialsValid}"> -->
+                                <h:dataTable value="#{history.entries}" var="entry" style="width: 100%;">
+                                    <h:column>
+                                        <f:facet name="header">X</f:facet>
+                                        #{entry.strX}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Y</f:facet>
+                                        #{entry.strY}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">R</f:facet>
+                                        #{entry.r}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">Результат</f:facet>
+                                        #{entry.resultStr}
+                                    </h:column>
+                                </h:dataTable>
+                            <!-- </c:when>
+                            <c:otherwise>
+                                <c:choose>
+                                    <c:when test="#{history.areCredentialsEntered}">
+                                        Неверные данные для подключения к базе данных.
+                                    </c:when>
+                                    <c:otherwise>
+                                        Введите данные для подключения к базе данных.
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:otherwise>
+                        </c:choose> -->
+                    </div>
+                    <!-- <c:if test="#{history.areCredentialsValid}"> -->
+                        <h:commandLink action="#{history.clear}" value="Очистить историю" />
+                    <!-- </c:if> -->
+                </h:form>
+            </p:outputPanel>
+        </div>
+    </composite:implementation>
+
+</html>

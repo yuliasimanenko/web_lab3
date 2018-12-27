@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "ru.ifmo.web_lab3.Beans.Points" table = "WEB_LAB3_HISTORY">
+
+        <id name = "ID" type = "java.lang.Long" column = "ID">
+            <generator class="native"/>
+        </id>
+
+        <property name = "X" column = "X" type = "java.lang.Double"/>
+        <property name = "Y" column = "Y" type = "java.lang.Double"/>
+        <property name = "R" column = "R" type ="java.lang.Double"/>
+        <property name = "RES" column = "RES" type = "java.lang.Boolean"/>
+
+    </class>
+</hibernate-mapping>

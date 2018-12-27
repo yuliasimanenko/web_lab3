@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<faces-config
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+        version="2.0"
+>
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{navigationController.viewMainPage}</from-action>
+            <to-view-id>main.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <navigation-case>
+            <from-action>#{navigationController.viewHomePage}</from-action>
+            <to-view-id>index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+    <managed-bean eager="true">
+        <managed-bean-name>navigationController</managed-bean-name>
+        <managed-bean-class>ru.ifmo.web_lab3.Beans.NavigationController</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>history</managed-bean-name>
+        <managed-bean-class>ru.ifmo.web_lab3.Beans.HistoryBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>formInput</managed-bean-name>
+        <managed-bean-class>ru.ifmo.web_lab3.Beans.FormInputBean</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>historyBean</property-name>
+            <value>#{history}</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>checkboxvalidator</managed-bean-name>
+        <managed-bean-class>ru.ifmo.web_lab3.Beans.CheckBoxValidateBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>inputBean</property-name>
+            <value>#{formInput}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>areaCheckBean</managed-bean-name>
+        <managed-bean-class>ru.ifmo.web_lab3.Beans.AreaCheckBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>historyBean</property-name>
+            <value>#{history}</value>
+        </managed-property>
+    </managed-bean>
+
+</faces-config>

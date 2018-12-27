@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:my="http://java.sun.com/jsf/composite/Components"
+>
+    <h:head>
+        <title>Лабораторная работа 3</title>
+        <h:outputStylesheet name="css/style.css" />
+
+        <style type="text/css">
+            .ui-analog-clock {
+                width: 200px;
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <div id="bg-img" />
+
+        <main>
+            <header>
+
+                Симаненко Юлия P3211 <br />
+                Вариант 321163
+            </header>
+
+            <h:form>
+                <!-- <p:clock displayMode="analog" mode="server" autoSync="true" syncInterval="6000" /> -->
+                <my:ClockComponent UpdateTime="5000" />
+            </h:form>
+
+            <h:form>
+                <h:commandLink action="#{navigationController.viewMainPage}" value="Перейти к вводу точек" />
+            </h:form>
+
+            <br />
+        </main>
+    </h:body>
+</html>

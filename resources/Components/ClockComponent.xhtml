@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+>
+    <composite:interface>
+        <composite:attribute name="UpdateTime" />
+    </composite:interface>
+
+    <composite:implementation>
+        <div id="clock-outer">
+
+        </div>
+
+        <h:outputScript>
+            (function() {
+                "use strict";
+
+                document.getElementById("clock-outer").innerHTML = new Date().toLocaleString();
+
+                window.setInterval(function() {
+                    document.getElementById("clock-outer").innerHTML = new Date().toLocaleString();
+                }, #{cc.attrs.UpdateTime});
+            })();
+        </h:outputScript>
+    </composite:implementation>
+
+</html>

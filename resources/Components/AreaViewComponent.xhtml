@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+>
+    <composite:interface>
+        <composite:attribute name="PointInAreaColor" />
+        <composite:attribute name="PointOutOfAreaColor" />
+        <composite:attribute name="AreaColor" />
+    </composite:interface>
+
+    <composite:implementation>
+        <h:outputScript name="js/draw-plot.js" />
+        <h:outputScript name="js/AreaViewComponent.js" />
+
+        <h:form id="area_check_form" style="display: none;">
+            <p:remoteCommand name="pointCheckCommand" action="#{areaCheckBean.pointCheck}"
+                             async="true" oncomplete="handleCheckResponse(xhr, status, args)" />
+        </h:form>
+
+        <div id="AreaViewComponent">
+            <canvas id="AreaViewCanvas" width="400" height="400" />
+        </div>
+
+        <h:outputScript>
+            "use strict";
+
+            let AreaViewComponent_View;
+
+            (function() {
+                let view = AreaViewComponent("#{cc.attrs.AreaColor}", #{formInput.r});
+                AreaViewComponent_View = view;
+                view.addListeners(document);
+                view.setClickHandler(function(x, y, r) {
+                    pointCheckCommand([{name: 'x', value: x}, {name: 'y', value: y}, {name: 'r', value: r}]);
+                });
+
+                window.handleCheckResponse = function(xhr, status, args) {
+                    if (status !== "success") {
+                        alert("Ошибка отправки запроса. Ответ сервера: " + status);
+                        return;
+                    }
+
+                    if (args.validationFailed) {
+                        alert('Неверные входные данные.');
+                        alert(xhr.responseText);
+                        return;
+                    }
+
+                    let color = args.isInArea ? "#{cc.attrs.PointInAreaColor}" : "#{cc.attrs.PointOutOfAreaColor}";
+                    view.setPoint(args.x, args.y, color);
+                };
+            })();
+        </h:outputScript>
+    </composite:implementation>
+</html>
